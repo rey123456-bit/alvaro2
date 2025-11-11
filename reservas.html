@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservas - Pensión Genesis</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="page-reservas">
+    <!-- Navegación -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <h1>🍽️ Pensión Genesis</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="menu.html">Menú</a></li>
+                <li><a href="reservas.html" class="active">Reservas</a></li>
+                <li><a href="admin.html">Admin</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <div class="menu-header">
+        <div class="container">
+            <h2>Completa tu Reserva</h2>
+            <p>Finaliza tu pedido y elige tu método de pago</p>
+        </div>
+    </div>
+
+    <!-- Formulario de Reserva -->
+    <section>
+        <div class="container">
+            <div class="reserva-container">
+                <h3>Resumen de tu Pedido</h3>
+                
+                <!-- Resumen del Carrito -->
+                <div class="cart-items" id="reservaCartItems" style="margin-bottom: 2rem;">
+                    <!-- Items del carrito -->
+                </div>
+                
+                <div class="cart-total" id="reservaTotal" style="text-align: right; margin-bottom: 2rem;">
+                    Total: Bs 0.00
+                </div>
+
+                <!-- Formulario -->
+                <form id="reservaForm">
+                    <div class="form-group">
+                        <label for="nombre">Nombre Completo *</label>
+                        <input type="text" id="nombre" required placeholder="Tu nombre">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefono">Teléfono *</label>
+                        <input type="tel" id="telefono" required placeholder="+591 7 123 4567">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" required placeholder="tu@email.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fecha">Fecha de Recogida *</label>
+                        <input type="date" id="fecha" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hora">Hora de Recogida *</label>
+                        <select id="hora" required>
+                            <option value="">Selecciona una hora</option>
+                            <optgroup label="Plato Único">
+                                <option value="08:00">08:00</option>
+                                <option value="08:30">08:30</option>
+                                <option value="09:00">09:00</option>
+                                <option value="09:30">09:30</option>
+                                <option value="10:00">10:00</option>
+                                <option value="10:30">10:30</option>
+                            </optgroup>
+                            <optgroup label="Almuerzo">
+                                <option value="13:00">13:00</option>
+                                <option value="13:30">13:30</option>
+                                <option value="14:00">14:00</option>
+                                <option value="14:30">14:30</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Método de Pago *</label>
+                        <div class="payment-methods">
+                            <div class="payment-option" data-payment="efectivo">
+                                <span class="payment-icon">💵</span>
+                                <p>Efectivo</p>
+                            </div>
+                            <div class="payment-option" data-payment="tarjeta">
+                                <span class="payment-icon">💳</span>
+                                <p>Tarjeta</p>
+                            </div>
+                            <div class="payment-option" data-payment="transferencia">
+                                <span class="payment-icon">🏦</span>
+                                <p>Transferencia</p>
+                            </div>
+                            <div class="payment-option" data-payment="qr">
+                                <span class="payment-icon">📱</span>
+                                <p>QR</p>
+                            </div>
+                        </div>
+                        <input type="hidden" id="metodoPago" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="notas">Notas Adicionales (Opcional)</label>
+                        <textarea id="notas" rows="4" placeholder="Alergias, preferencias, etc."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-checkout">
+                        Confirmar Reserva
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Toast de notificaciones -->
+    <div class="toast" id="toast">
+        <p id="toastMessage"></p>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Pensión Genesis</h3>
+                <p>Comida casera con el sabor del pueblo desde 2025</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <p>📞 Teléfono: +591 68339712</p>
+                <p>📧 Email: eroditarosagomezchoque@gmail.com</p>
+                <p>📍 Dirección: Cospa, Provincia Sajama, Oruro, Bolivia</p>
+            </div>
+            <div class="footer-section">
+                <h3>Horario</h3>
+                <p>Lunes a Domingo</p>
+                <p>Plato Único: 8:00 - 11:00</p>
+                <p>Almuerzos: 13:00 - 15:00</p>
+            </div>
+            <div class="footer-section">
+                <h3>Síguenos</h3>
+                <div class="social-links">
+                    <a href="https://wa.me/59171234567" target="_blank" class="social-btn whatsapp">
+                        💬 WhatsApp
+                    </a>
+                    <a href="mailto:info@pensiongenesis.com" class="social-btn email">
+                        📧 Email
+                    </a>
+                    <a href="https://facebook.com" target="_blank" class="social-btn facebook">
+                        📘 Facebook
+                    </a>
+                    <a href="https://instagram.com" target="_blank" class="social-btn instagram">
+                        📷 Instagram
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Pensión Genesis. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="reservas.js"></script>
+</body>
+</html>

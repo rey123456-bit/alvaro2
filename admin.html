@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Admin - Pensión Genesis</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="page-admin">
+    <!-- Navegación -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <h1>🍽️ Pensión Genesis</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="menu.html">Menú</a></li>
+                <li><a href="reservas.html">Reservas</a></li>
+                <li><a href="admin.html" class="active">Admin</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <div class="menu-header">
+        <div class="container">
+            <h2>Panel de Administración</h2>
+            <p>Gestiona tu menú y configuración diaria</p>
+        </div>
+    </div>
+
+    <!-- Contenido Admin -->
+    <section>
+        <div class="container admin-container">
+            
+            <!-- Configuración de Notificaciones -->
+            <div class="admin-section">
+                <h3>⚙️ Configuración de Notificaciones</h3>
+                <div class="notification-config">
+                    <div class="form-group">
+                        <label for="adminEmail">Email para Notificaciones</label>
+                        <input type="email" id="adminEmail" placeholder="tu@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="adminWhatsApp">WhatsApp para Notificaciones</label>
+                        <input type="tel" id="adminWhatsApp" placeholder="+591 7 123 4567">
+                    </div>
+                    <button class="btn-secondary" onclick="guardarConfiguracion()">
+                        Guardar Configuración
+                    </button>
+                </div>
+            </div>
+
+            <!-- Gestión de Plato Único -->
+            <div class="admin-section">
+                <h3>☀️ Gestión de Plato Único</h3>
+                <p style="margin-bottom: 1rem;">Actualiza los 2 platos únicos del día</p>
+                
+                <div id="desayunosAdmin">
+                    <!-- Plato Único 1 -->
+                    <div class="form-group">
+                        <label>Plato Único 1</label>
+                        <input type="text" id="des1_nombre" placeholder="Nombre del plato" style="margin-bottom: 0.5rem;">
+                        <input type="number" id="des1_precio" placeholder="Precio (Bs)" step="0.01" style="margin-bottom: 0.5rem;">
+                        <textarea id="des1_ingredientes" placeholder="Ingredientes (separados por coma)" rows="3" style="margin-bottom: 0.5rem;"></textarea>
+                        <input type="number" id="des1_stock" placeholder="Cantidad disponible" style="margin-bottom: 0.5rem;">
+                        
+                        <div class="image-upload-container">
+                            <div class="image-preview" id="preview_des1">
+                                <span style="color: #95a5a6;">Sin imagen</span>
+                            </div>
+                            <div class="file-input-wrapper">
+                                <input type="file" id="des1_imagen" accept="image/*" onchange="previewImage(this, 'preview_des1')">
+                                <label for="des1_imagen" class="file-input-label">📁 Cargar Imagen</label>
+                            </div>
+                            <input type="text" id="des1_imagen_url" placeholder="O pega URL de imagen" style="flex: 1;">
+                        </div>
+                    </div>
+
+                    <!-- Plato Único 2 -->
+                    <div class="form-group">
+                        <label>Plato Único 2</label>
+                        <input type="text" id="des2_nombre" placeholder="Nombre del plato" style="margin-bottom: 0.5rem;">
+                        <input type="number" id="des2_precio" placeholder="Precio (Bs)" step="0.01" style="margin-bottom: 0.5rem;">
+                        <textarea id="des2_ingredientes" placeholder="Ingredientes (separados por coma)" rows="3" style="margin-bottom: 0.5rem;"></textarea>
+                        <input type="number" id="des2_stock" placeholder="Cantidad disponible" style="margin-bottom: 0.5rem;">
+                        
+                        <div class="image-upload-container">
+                            <div class="image-preview" id="preview_des2">
+                                <span style="color: #95a5a6;">Sin imagen</span>
+                            </div>
+                            <div class="file-input-wrapper">
+                                <input type="file" id="des2_imagen" accept="image/*" onchange="previewImage(this, 'preview_des2')">
+                                <label for="des2_imagen" class="file-input-label">📁 Cargar Imagen</label>
+                            </div>
+                            <input type="text" id="des2_imagen_url" placeholder="O pega URL de imagen" style="flex: 1;">
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn-secondary" onclick="actualizarDesayunos()">
+                    Actualizar Plato Único
+                </button>
+            </div>
+
+            <!-- Gestión de Almuerzo -->
+            <div class="admin-section">
+                <h3>🍽️ Gestión de Almuerzo</h3>
+                <p style="margin-bottom: 1rem;">Actualiza la sopa y el segundo del día</p>
+                
+                <!-- Sopa -->
+                <div class="form-group">
+                    <label>Sopa del Día</label>
+                    <input type="text" id="alm_nombre" placeholder="Nombre de la sopa" style="margin-bottom: 0.5rem;">
+                    <input type="number" id="alm_precio" placeholder="Precio (Bs)" step="0.01" style="margin-bottom: 0.5rem;">
+                    <textarea id="alm_ingredientes" placeholder="Ingredientes (separados por coma)" rows="3" style="margin-bottom: 0.5rem;"></textarea>
+                    <input type="number" id="alm_stock" placeholder="Cantidad disponible" style="margin-bottom: 0.5rem;">
+                    
+                    <div class="image-upload-container">
+                        <div class="image-preview" id="preview_alm">
+                            <span style="color: #95a5a6;">Sin imagen</span>
+                        </div>
+                        <div class="file-input-wrapper">
+                            <input type="file" id="alm_imagen" accept="image/*" onchange="previewImage(this, 'preview_alm')">
+                            <label for="alm_imagen" class="file-input-label">📁 Cargar Imagen</label>
+                        </div>
+                        <input type="text" id="alm_imagen_url" placeholder="O pega URL de imagen" style="flex: 1;">
+                    </div>
+                </div>
+
+                <!-- Segundo -->
+                <div class="form-group">
+                    <label>Segundo del Día</label>
+                    <input type="text" id="alm2_nombre" placeholder="Nombre del segundo" style="margin-bottom: 0.5rem;">
+                    <input type="number" id="alm2_precio" placeholder="Precio (Bs)" step="0.01" style="margin-bottom: 0.5rem;">
+                    <textarea id="alm2_ingredientes" placeholder="Ingredientes (separados por coma)" rows="3" style="margin-bottom: 0.5rem;"></textarea>
+                    <input type="number" id="alm2_stock" placeholder="Cantidad disponible" style="margin-bottom: 0.5rem;">
+                    
+                    <div class="image-upload-container">
+                        <div class="image-preview" id="preview_alm2">
+                            <span style="color: #95a5a6;">Sin imagen</span>
+                        </div>
+                        <div class="file-input-wrapper">
+                            <input type="file" id="alm2_imagen" accept="image/*" onchange="previewImage(this, 'preview_alm2')">
+                            <label for="alm2_imagen" class="file-input-label">📁 Cargar Imagen</label>
+                        </div>
+                        <input type="text" id="alm2_imagen_url" placeholder="O pega URL de imagen" style="flex: 1;">
+                    </div>
+                </div>
+
+                <button class="btn-secondary" onclick="actualizarAlmuerzo()">
+                    Actualizar Almuerzo
+                </button>
+            </div>
+
+            <!-- Gestión de Bebidas -->
+            <div class="admin-section">
+                <h3>🥤 Gestión de Bebidas</h3>
+                <p style="margin-bottom: 1rem;">Actualiza disponibilidad y precios de bebidas</p>
+                
+                <div class="menu-grid">
+                    <!-- Refresco -->
+                    <div class="form-group">
+                        <label>Refresco</label>
+                        <input type="number" id="beb_refresco_precio" placeholder="Precio (Bs)" step="0.01" style="margin-bottom: 0.5rem;">
+                        <input type="number" id="beb_refresco_stock" placeholder="Stock disponible" style="margin-bottom: 0.5rem;">
+                        <input type="text" id="beb_refresco_imagen" placeholder="URL de imagen" style="margin-bottom: 0.5rem;">
+                    </div>
+
+                    <!-- Agua -->
+                    <div class="form-group">
+                        <label>Agua</label>
+                        <input type="number" id="beb_agua_precio" placeholder="Precio (Bs)" step="0.01" style="margin-bottom: 0.5rem;">
+                        <input type="number" id="beb_agua_stock" placeholder="Stock disponible" style="margin-bottom: 0.5rem;">
+                        <input type="text" id="beb_agua_imagen" placeholder="URL de imagen" style="margin-bottom: 0.5rem;">
+                    </div>
+
+                    <!-- Jugo -->
+                    <div class="form-group">
+                        <label>Jugo</label>
+                        <input type="number" id="beb_jugo_precio" placeholder="Precio (Bs)" step="0.01" style="margin-bottom: 0.5rem;">
+                        <input type="number" id="beb_jugo_stock" placeholder="Stock disponible" style="margin-bottom: 0.5rem;">
+                        <input type="text" id="beb_jugo_imagen" placeholder="URL de imagen" style="margin-bottom: 0.5rem;">
+                    </div>
+                </div>
+
+                <button class="btn-secondary" onclick="actualizarBebidas()">
+                    Actualizar Bebidas
+                </button>
+            </div>
+
+            <!-- Reservas Recibidas -->
+            <div class="admin-section">
+                <h3>📋 Reservas Recibidas Hoy</h3>
+                <div id="reservasList">
+                    <p style="text-align: center; color: #7f8c8d;">No hay reservas pendientes</p>
+                </div>
+            </div>
+
+            <!-- Acciones Rápidas -->
+            <div class="admin-section">
+                <h3>🔧 Acciones Rápidas</h3>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <button class="btn-secondary" onclick="cargarDatosIniciales()">
+                        Cargar Datos de Ejemplo
+                    </button>
+                    <button class="btn-danger" onclick="limpiarReservas()">
+                        Limpiar Reservas
+                    </button>
+                    <button class="btn-secondary" onclick="exportarDatos()">
+                        Exportar Datos
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Toast de notificaciones -->
+    <div class="toast" id="toast">
+        <p id="toastMessage"></p>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Pensión Genesis</h3>
+                <p>Comida casera con el sabor del pueblo desde 2025</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <p>📞 Teléfono: +591 68339712</p>
+                <p>📧 Email: eroditarosagomezchoque@gmail.com</p>
+                <p>📍 Dirección: Cospa, Provincia Sajama, Oruro, Bolivia</p>
+            </div>
+            <div class="footer-section">
+                <h3>Horario</h3>
+                <p>Lunes a Domingo</p>
+                <p>Plato Único: 8:00 - 11:00</p>
+                <p>Almuerzos: 13:00 - 15:00</p>
+            </div>
+            <div class="footer-section">
+                <h3>Síguenos</h3>
+                <div class="social-links">
+                    <a href="https://wa.me/59171234567" target="_blank" class="social-btn whatsapp">
+                        💬 WhatsApp
+                    </a>
+                    <a href="mailto:info@pensiongenesis.com" class="social-btn email">
+                        📧 Email
+                    </a>
+                    <a href="https://facebook.com" target="_blank" class="social-btn facebook">
+                        📘 Facebook
+                    </a>
+                    <a href="https://instagram.com" target="_blank" class="social-btn instagram">
+                        📷 Instagram
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Pensión Genesis. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>
